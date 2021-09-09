@@ -1,0 +1,35 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h2><b>Buscar por Región:</b> <small> {{regionActiva | titlecase}} </small></h2>
+    <hr>
+    
+    <h5>Seleccione la Región</h5>
+    <div class="row">
+        <div class="col">
+            <!-- [class.btn-primary]="reg === regionActiva" -->
+    
+            <!-- ngClass me sirve para evaluar las condiciones para una clase, a continuación ,
+            tenemos que, aplicamos la clase btn-primary si la regionActiva es igual a la region
+            que estamos seleccionado, y vamos separando por comas , las diferentes condiciones 
+               ----------------------------------------------------------------------- 
+                        [ngClass]="{
+                            'btn-primary' : regionActiva === reg,
+                            'btn-outline-primary' : regionActiva !== reg
+                        }"
+                ----------------------------------------------------------------------- -->
+            <button id="botonerita" 
+                    *ngFor="let reg of regiones" 
+                    [class]="getClaseCSS( reg )"
+                    (click)="activarRegion( reg )">
+                {{reg | titlecase}}
+            </button>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div *ngIf="paises.length > 0" class="row">
+    <div class="col">
+        <app-pais-tabla [paises]="paises"></app-pais-tabla>
+    </div>
+</div>

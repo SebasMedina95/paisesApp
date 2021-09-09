@@ -1,0 +1,34 @@
+<table *ngIf="paises.length > 0" class="table table-hover table-striped .table-responsive">
+    <thead>
+        <tr class="table-dark">
+            <th>#</th>
+            <th>Bandera</th>
+            <th>País</th>
+            <th>Capital</th>
+            <th>Región</th>
+            <th>Código (3)</th>
+            <th>Población</th>
+            <th>Más Información</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let valPaises of paises; index as i"
+            class="animate__animated animate__fadeIn animate__faster">
+            <td>{{i+1}}</td>
+            <td>
+                <img 
+                [src]="valPaises.flag" 
+                [alt]="valPaises.name" 
+                class="small-flag img-fluid"/>
+            </td>
+            <td>{{valPaises.name}}</td>
+            <td>{{valPaises.capital}}</td>
+            <td>{{valPaises.region}}</td>
+            <td>{{valPaises.alpha3Code}}</td>
+            <td>{{valPaises.population | number}}</td>
+            <td>
+                <a [routerLink]="['/pais', valPaises.alpha2Code]">Ver ...</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

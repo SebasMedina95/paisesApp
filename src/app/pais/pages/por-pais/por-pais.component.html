@@ -1,0 +1,89 @@
+<div class="animate__animated animate__fadeIn animate__faster">
+    <h2>Por País</h2>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <!-- Gracias al Output que definimos en pais-input accedemos a su evento.
+            Consideremos lo siguiente, dentro del app-pais-input estamos mandando 
+            valores a X propiedades, estas las definimos según sea el caso  -->
+            <app-pais-input
+                (onEnter)="buscar( $event )"
+                (onDebounce)="sugerencias( $event )"
+                placeholder="Buscar por País ..."
+            ></app-pais-input>
+            <!-- <form (ngSubmit)="buscar()" action="" autocomplete="off">
+                <input type="text"
+                       name="termino"
+                       placeholder="Buscar por país ..."
+                       class="form-control"
+                       [(ngModel)]="termino"/>
+            </form> -->
+        </div>
+    </div>
+</div>
+
+<!-- Creacion de las Sugerencias! -->
+<ul *ngIf="mostrarSugerencia"
+    class="list-group">
+    <li class="list-group-item list-group-item-action"
+        *ngFor="let items of paisesSugeridos">
+        <div class="form-group">
+            <div class="input-group">
+                <img src="{{items.flag}}" class="very-small-flag">
+                <a class="nav-link" [routerLink]="['/pais', items.alpha2Code]"> {{items.name}} </a>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item list-group-item-action">
+        <a class="nav-link"
+           (click)="buscarSugerido(termino)"> 
+            Buscar "{{termino}}"    
+        </a>
+    </li>
+</ul>
+
+<hr>
+<!-- Condicional para validar la variable de si hayError -->
+<div *ngIf="hayError" class="alert alert-danger" role="alert">
+      No se encontró nada con el término "{{termino}}" verifique escritura o nombre en <b>ingles</b>.
+</div>
+
+<div class="row">
+    <div class="col table-responsive-sm">
+        <!-- Envío de pais.component piases como propiedad 
+        Para usar el input necesito esta parte [paises]="paises"-->
+        <app-pais-tabla [paises]="paises"></app-pais-tabla>
+        <!-- <table  *ngIf="!hayError" class="table table-hover table-striped .table-responsive"> -->
+        <!-- <table *ngIf="paises.length > 0" class="table table-hover table-striped .table-responsive">
+            <thead>
+                <tr class="table-dark">
+                    <th>#</th>
+                    <th>Bandera</th>
+                    <th>Nombre</th>
+                    <th>Código (3)</th>
+                    <th>Región</th>
+                    <th>Población</th>
+                    <th>Más Información</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let valPaises of paises; index as i">
+                    <td>{{i+1}}</td>
+                    <td>
+                        <img 
+                        [src]="valPaises.flag" 
+                        [alt]="valPaises.name" 
+                        class="small-flag img-fluid"/>
+                    </td>
+                    <td>{{valPaises.name}}</td>
+                    <td>{{valPaises.region}}</td>
+                    <td>{{valPaises.alpha3Code}}</td>
+                    <td>{{valPaises.population | number}}</td>
+                    <td>
+                        <a [routerLink]="['/pais', valPaises.alpha2Code]">Ver ...</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div>
+</div>

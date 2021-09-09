@@ -1,0 +1,18 @@
+<h2>Busquedas</h2>
+<hr>
+<ul class="list-group">
+    <!-- En el routerLink colocamos el path que corresponde a la ruta
+    PD: routerLinkActive para aplicar clase inmediatamente esté parado y
+    [routerLinkActiveOptions] con exact true para que se active exactamente
+    cuando realmente estémos parados en el elemento. -->
+    <li routerLink=""
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact : true}" 
+        class="list-group-item">Buscar por País</li>
+    <li routerLink="region"
+        routerLinkActive="active" 
+        class="list-group-item">Buscar por Región</li>
+    <li routerLink="capital" 
+        routerLinkActive="active"
+        class="list-group-item">Buscar por Capital</li>
+</ul>
